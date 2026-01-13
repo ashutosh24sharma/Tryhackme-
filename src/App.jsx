@@ -1,11 +1,8 @@
 import React from 'react'
-
+import Home from './Pages/Home/home.jsx'
   function App() {
   return (
-    <div>
-      <h1 className='text-amber-400'>Hello, World!</h1>
-      <p>Welcome to my React application.</p>
-    </div>
+   <><Home /></>
   )
 }
 
