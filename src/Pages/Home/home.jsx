@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [email, setEmail] = useState('');
+
+   const navigate = useNavigate();
 
   const menuItems = ['Learn', 'Practice', 'Compete', 'Education', 'Business', 'Pricing'];
 
@@ -97,11 +101,26 @@ export default function HomePage() {
         </div>
 
         {/* Auth Buttons */}
-        <div className="flex items-center gap-4">
-          <button className="hidden sm:block px-6 py-2.5 border-2 border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-slate-900 transition-all duration-300 font-semibold">
-            Log In
-          </button>
-        <button className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base bg-gradient-to-r from-green-400 to-green-500 text-slate-900 rounded-full font-semibold sm:font-bold transition-all duration-300 active:scale-95 hover:shadow-lg hover:shadow-green-400/40 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400">Join for FREE</button>
+       <div className="flex items-center gap-4">
+  <button
+    onClick={() => navigate("/login")}
+    className="hidden sm:block px-6 py-2.5 border-2 border-green-400 
+               text-green-400 rounded-full hover:bg-green-400 
+               hover:text-slate-900 transition-all duration-300 font-semibold"
+  >
+    Log In
+  </button>
+
+  <button  onClick={() => navigate("/signup")}
+    className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 
+               text-sm sm:text-base bg-gradient-to-r from-green-400 
+               to-green-500 text-slate-900 rounded-full font-semibold 
+               sm:font-bold transition-all duration-300 active:scale-95 
+               hover:shadow-lg hover:shadow-green-400/40 hover:scale-105 
+               focus:outline-none focus:ring-2 focus:ring-green-400"
+  >
+    Join for FREE
+  </button>
 
 
           {/* Mobile Menu Toggle */}
