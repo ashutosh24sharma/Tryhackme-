@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [email, setEmail] = useState('');
 
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const menuItems = ['Learn', 'Practice', 'Compete', 'Education', 'Business', 'Pricing'];
+  const menuItems = [
+    { name: 'Learn', path: '/learn' },
+    { name: 'Practice', path: '/practice' },
+    { name: 'Compete', path: '/compete' },
+    { name: 'Education', path: '/education' },
+    { name: 'Business', path: '/business' },
+    { name: 'Pricing', path: '/pricing' }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 font-sans antialiased overflow-hidden">
@@ -16,57 +22,60 @@ export default function HomePage() {
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-18px); }
+          50% { transform: translateY(-20px); }
         }
         @keyframes pulse-glow {
-          0%, 100% { opacity: 0.6; }
+          0%, 100% { opacity: 0.5; }
           50% { opacity: 1; }
         }
         @keyframes shadow-move {
-          0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.3; }
-          50% { transform: translateX(-50%) scale(0.8); opacity: 0.15; }
+          0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.4; }
+          50% { transform: translateX(-50%) scale(0.85); opacity: 0.2; }
         }
         @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
         }
-        .float-animation { animation: float 3.5s ease-in-out infinite; }
-        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-        .shadow-animation { animation: shadow-move 3.5s ease-in-out infinite; }
+        .float-animation { animation: float 4s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+        .shadow-animation { animation: shadow-move 4s ease-in-out infinite; }
         .gradient-animate {
           background-size: 200% 200%;
-          animation: gradient-shift 4s ease infinite;
+          animation: gradient-shift 5s ease infinite;
         }
       `}</style>
 
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-green-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-900/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-green-500/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/20 rounded-full blur-3xl" />
         
         {/* Grid Pattern */}
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(#4ade80 1px, transparent 1px), linear-gradient(90deg, #4ade80 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
+            backgroundImage: `linear-gradient(#4ade80 1.5px, transparent 1.5px), linear-gradient(90deg, #4ade80 1.5px, transparent 1.5px)`,
+            backgroundSize: '60px 60px',
           }}
         />
         
         {/* Floating Particles */}
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-green-400/50 rounded-full pulse-glow" />
-        <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-cyan-400/50 rounded-full pulse-glow" />
-        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-green-400/40 rounded-full pulse-glow" />
-        <div className="absolute top-2/3 right-1/4 w-1.5 h-1.5 bg-cyan-400/40 rounded-full pulse-glow" />
-        <div className="absolute bottom-1/4 right-1/2 w-1 h-1 bg-green-400/60 rounded-full pulse-glow" />
+        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-green-400/60 rounded-full pulse-glow" />
+        <div className="absolute top-1/3 right-1/3 w-2 h-2 bg-cyan-400/60 rounded-full pulse-glow" />
+        <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-green-400/50 rounded-full pulse-glow" />
+        <div className="absolute top-2/3 right-1/4 w-2 h-2 bg-cyan-400/50 rounded-full pulse-glow" />
+        <div className="absolute bottom-1/4 right-1/2 w-2 h-2 bg-green-400/70 rounded-full pulse-glow" />
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-50 flex items-center justify-between px-6 lg:px-16 py-5">
+      <nav className="relative z-50 flex items-center justify-between px-8 lg:px-20 py-6 lg:py-8">
         {/* Logo */}
-        <div className="flex items-center gap-3 cursor-pointer group">
-          <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none">
+        <div 
+          onClick={() => navigate('/')}
+          className="flex items-center gap-4 cursor-pointer group"
+        >
+          <svg className="w-12 h-12 lg:w-14 lg:h-14" viewBox="0 0 40 40" fill="none">
             <defs>
               <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#22d3ee" />
@@ -81,58 +90,58 @@ export default function HomePage() {
               0110
             </text>
           </svg>
-          <span className="text-xl font-bold text-white">
+          <span className="text-2xl lg:text-3xl font-bold text-white group-hover:scale-105 transition-transform">
             Try<span className="text-green-400">Hack</span>Me
           </span>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-10">
           {menuItems.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium relative group"
+            <button
+              key={item.name}
+              onClick={() => navigate(item.path)}
+              className="text-gray-300 hover:text-green-400 transition-all duration-300 font-semibold text-lg relative group"
             >
-              {item}
+              {item.name}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-cyan-400 group-hover:w-full transition-all duration-300" />
-            </a>
+            </button>
           ))}
         </div>
 
         {/* Auth Buttons */}
-       <div className="flex items-center gap-4">
-  <button
-    onClick={() => navigate("/login")}
-    className="hidden sm:block px-6 py-2.5 border-2 border-green-400 
-               text-green-400 rounded-full hover:bg-green-400 
-               hover:text-slate-900 transition-all duration-300 font-semibold"
-  >
-    Log In
-  </button>
+        <div className="flex items-center gap-5">
+          <button
+            onClick={() => navigate("/login")}
+            className="hidden sm:block px-8 py-3 border-2 border-green-400 
+                       text-green-400 rounded-full hover:bg-green-400 
+                       hover:text-slate-900 transition-all duration-300 font-bold text-lg
+                       hover:scale-105 active:scale-95"
+          >
+            Log In
+          </button>
 
-  <button  onClick={() => navigate("/signup")}
-    className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 
-               text-sm sm:text-base bg-gradient-to-r from-green-400 
-               to-green-500 text-slate-900 rounded-full font-semibold 
-               sm:font-bold transition-all duration-300 active:scale-95 
-               hover:shadow-lg hover:shadow-green-400/40 hover:scale-105 
-               focus:outline-none focus:ring-2 focus:ring-green-400"
-  >
-    Join for FREE
-  </button>
-
+          <button  
+            onClick={() => navigate("/signup")}
+            className="px-8 py-3 text-lg bg-gradient-to-r from-green-400 
+                       to-green-500 text-slate-900 rounded-full font-bold 
+                       transition-all duration-300 active:scale-95 
+                       hover:shadow-2xl hover:shadow-green-400/50 hover:scale-105 
+                       focus:outline-none focus:ring-4 focus:ring-green-400/50"
+          >
+            Join for FREE
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button
-            className="lg:hidden p-2 text-gray-300 hover:text-green-400 transition-colors"
+            className="lg:hidden p-3 text-gray-300 hover:text-green-400 transition-colors rounded-lg hover:bg-slate-800/50"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
@@ -140,18 +149,27 @@ export default function HomePage() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-slate-900/98 backdrop-blur-xl border-t border-gray-800 lg:hidden shadow-2xl">
-            <div className="flex flex-col p-6 gap-4">
+          <div className="absolute top-full left-0 right-0 bg-slate-900/98 backdrop-blur-xl border-t border-gray-700 lg:hidden shadow-2xl">
+            <div className="flex flex-col p-8 gap-4">
               {menuItems.map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-gray-300 hover:text-green-400 transition-colors font-medium py-3 px-4 rounded-xl hover:bg-slate-800/50"
+                <button
+                  key={item.name}
+                  onClick={() => {
+                    navigate(item.path);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-gray-300 hover:text-green-400 transition-colors font-semibold text-xl py-4 px-5 rounded-xl hover:bg-slate-800/70 text-left"
                 >
-                  {item}
-                </a>
+                  {item.name}
+                </button>
               ))}
-              <button className="sm:hidden mt-4 px-6 py-3 border-2 border-green-400 text-green-400 rounded-full font-semibold">
+              <button 
+                onClick={() => {
+                  navigate("/login");
+                  setMobileMenuOpen(false);
+                }}
+                className="sm:hidden mt-4 px-8 py-4 border-2 border-green-400 text-green-400 rounded-full font-bold text-lg hover:bg-green-400 hover:text-slate-900 transition-all duration-300"
+              >
                 Log In
               </button>
             </div>
@@ -160,74 +178,77 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <main className="relative z-10 container mx-auto px-6 lg:px-16 py-12 lg:py-20">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+      <main className="relative z-10 container mx-auto px-8 lg:px-20 py-16 lg:py-24">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-20">
           
           {/* Left Content */}
-          <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
+          <div className="flex-1 text-center lg:text-left order-2 lg:order-1 max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-400/10 border border-green-400/30 rounded-full mb-6">
-              <span className="w-2 h-2 bg-green-400 rounded-full pulse-glow" />
-              <span className="text-green-400 text-sm font-medium">#1 Cyber Security Training Platform</span>
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-green-400/10 border-2 border-green-400/40 rounded-full mb-8">
+              <span className="w-3 h-3 bg-green-400 rounded-full pulse-glow" />
+              <span className="text-green-400 text-base lg:text-lg font-bold">#1 Cyber Security Training Platform</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white leading-tight mb-8">
               Anyone can learn{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-cyan-400 to-green-400 gradient-animate">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-cyan-400 to-green-400 gradient-animate block lg:inline">
                 cyber security
               </span>{' '}
               with TryHackMe
             </h1>
 
             {/* Neon Underline */}
-            <div className="w-32 h-1 bg-gradient-to-r from-green-400 to-cyan-400 rounded-full shadow-lg shadow-green-400/50 mx-auto lg:mx-0 mb-6" />
+            <div className="w-40 h-1.5 bg-gradient-to-r from-green-400 to-cyan-400 rounded-full shadow-2xl shadow-green-400/60 mx-auto lg:mx-0 mb-8" />
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0 font-medium">
               Hands-on cyber security training through real-world scenarios. Learn by doing with our gamified platform.
             </p>
 
             {/* Email Form */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 max-w-md mx-auto lg:mx-0">
+            <div className="flex flex-col sm:flex-row gap-5 mb-12 max-w-2xl mx-auto lg:mx-0">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                className="flex-1 px-6 py-4 bg-slate-800/70 border border-gray-700 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all duration-300"
+                placeholder="Enter your email"
+                className="flex-1 px-8 py-5 text-lg bg-slate-800/70 border-2 border-gray-700 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-4 focus:ring-green-400/30 transition-all duration-300"
               />
-              <button className="px-8 py-4 bg-gradient-to-r from-green-400 to-green-500 text-slate-900 rounded-full font-bold hover:shadow-xl hover:shadow-green-400/30 hover:scale-105 active:scale-100 transition-all duration-300 whitespace-nowrap">
+              <button 
+                onClick={() => navigate("/signup")}
+                className="px-10 py-5 bg-gradient-to-r from-green-400 to-green-500 text-slate-900 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-green-400/50 hover:scale-105 active:scale-100 transition-all duration-300 whitespace-nowrap"
+              >
                 Join for FREE
               </button>
             </div>
 
             {/* Checklist */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-6">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-8 mb-12">
               {['Beginner friendly', 'Guides and challenges', 'Real-world scenarios'].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-green-400/20 rounded-full flex items-center justify-center border border-green-400/30">
-                    <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <div key={item} className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-green-400/20 rounded-full flex items-center justify-center border-2 border-green-400/40">
+                    <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-gray-300 text-sm sm:text-base">{item}</span>
+                  <span className="text-gray-200 text-lg lg:text-xl font-medium">{item}</span>
                 </div>
               ))}
             </div>
 
             {/* Stats */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-8 mt-10 pt-10 border-t border-gray-800">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-12 pt-12 border-t-2 border-gray-800">
               {[
                 { value: '2M+', label: 'Users' },
                 { value: '500+', label: 'Labs' },
                 { value: '100+', label: 'Learning Paths' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center lg:text-left">
-                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">
+                  <div className="text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400 mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-gray-500 text-sm mt-1">{stat.label}</div>
+                  <div className="text-gray-400 text-lg lg:text-xl font-semibold">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -237,12 +258,12 @@ export default function HomePage() {
           <div className="flex-1 order-1 lg:order-2 flex justify-center lg:justify-end">
             <div className="relative">
               {/* Robot Shadow */}
-              <div className="absolute -bottom-8 left-1/2 w-48 h-8 bg-cyan-400/30 rounded-full blur-2xl shadow-animation" />
+              <div className="absolute -bottom-10 left-1/2 w-64 h-12 bg-cyan-400/40 rounded-full blur-3xl shadow-animation" />
 
               {/* Robot with Float Animation */}
               <div className="float-animation">
                 <svg
-                  className="w-72 h-96 sm:w-80 sm:h-[420px] lg:w-[380px] lg:h-[500px]"
+                  className="w-80 h-[440px] sm:w-96 sm:h-[520px] lg:w-[450px] lg:h-[600px]"
                   viewBox="0 0 300 400"
                   fill="none"
                 >
@@ -267,14 +288,14 @@ export default function HomePage() {
                       <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
                     </linearGradient>
                     <filter id="glow">
-                      <feGaussianBlur stdDeviation="3" result="blur" />
+                      <feGaussianBlur stdDeviation="4" result="blur" />
                       <feMerge>
                         <feMergeNode in="blur" />
                         <feMergeNode in="SourceGraphic" />
                       </feMerge>
                     </filter>
                     <filter id="strongGlow">
-                      <feGaussianBlur stdDeviation="5" result="blur" />
+                      <feGaussianBlur stdDeviation="6" result="blur" />
                       <feMerge>
                         <feMergeNode in="blur" />
                         <feMergeNode in="SourceGraphic" />
@@ -283,22 +304,22 @@ export default function HomePage() {
                   </defs>
 
                   {/* Backpack */}
-                  <rect x="115" y="110" width="70" height="85" rx="10" fill="url(#bodyGrad)" stroke="#4ade80" strokeWidth="1.5" />
-                  <rect x="125" y="120" width="50" height="25" rx="5" fill="#0f172a" stroke="#22d3ee" strokeWidth="0.5" />
+                  <rect x="115" y="110" width="70" height="85" rx="10" fill="url(#bodyGrad)" stroke="#4ade80" strokeWidth="2" />
+                  <rect x="125" y="120" width="50" height="25" rx="5" fill="#0f172a" stroke="#22d3ee" strokeWidth="1" />
                   <circle cx="138" cy="132" r="6" fill="#4ade80" filter="url(#glow)" className="pulse-glow" />
                   <circle cx="150" cy="132" r="6" fill="#22d3ee" filter="url(#glow)" className="pulse-glow" />
                   <circle cx="162" cy="132" r="6" fill="#4ade80" filter="url(#glow)" className="pulse-glow" />
-                  <rect x="125" y="152" width="45" height="6" rx="3" fill="#4ade80" opacity="0.5" />
-                  <rect x="125" y="164" width="30" height="6" rx="3" fill="#22d3ee" opacity="0.5" />
-                  <rect x="125" y="176" width="38" height="6" rx="3" fill="#4ade80" opacity="0.5" />
+                  <rect x="125" y="152" width="45" height="6" rx="3" fill="#4ade80" opacity="0.6" />
+                  <rect x="125" y="164" width="30" height="6" rx="3" fill="#22d3ee" opacity="0.6" />
+                  <rect x="125" y="176" width="38" height="6" rx="3" fill="#4ade80" opacity="0.6" />
 
                   {/* Head */}
                   <ellipse cx="150" cy="58" rx="55" ry="50" fill="url(#bodyGrad)" stroke="url(#metalGrad)" strokeWidth="3" />
                   <path d="M97 48 Q150 25 203 48" stroke="url(#metalGrad)" strokeWidth="5" fill="none" />
 
                   {/* Visor */}
-                  <path d="M105 58 Q150 42 195 58 Q195 92 150 98 Q105 92 105 58" fill="url(#visorGrad)" opacity="0.9" filter="url(#glow)" />
-                  <path d="M115 62 Q150 50 185 62 Q185 86 150 92 Q115 86 115 62" fill="#0f172a" opacity="0.6" />
+                  <path d="M105 58 Q150 42 195 58 Q195 92 150 98 Q105 92 105 58" fill="url(#visorGrad)" opacity="0.95" filter="url(#glow)" />
+                  <path d="M115 62 Q150 50 185 62 Q185 86 150 92 Q115 86 115 62" fill="#0f172a" opacity="0.7" />
 
                   {/* Eyes */}
                   <ellipse cx="130" cy="72" rx="12" ry="10" fill="#4ade80" filter="url(#glow)" className="pulse-glow" />
@@ -324,10 +345,10 @@ export default function HomePage() {
                   <path d="M90 125 L210 125 L220 220 L205 240 L95 240 L80 220 Z" fill="url(#bodyGrad)" stroke="url(#metalGrad)" strokeWidth="2" />
 
                   {/* Chest Panel */}
-                  <rect x="112" y="145" width="76" height="55" rx="8" fill="#0f172a" stroke="#4ade80" strokeWidth="1" />
-                  <circle cx="150" cy="172" r="22" fill="#0f172a" stroke="#22d3ee" strokeWidth="2.5" />
-                  <circle cx="150" cy="172" r="16" fill="#22d3ee" opacity="0.25" filter="url(#strongGlow)" className="pulse-glow" />
-                  <circle cx="150" cy="172" r="10" fill="#22d3ee" opacity="0.7" filter="url(#glow)" />
+                  <rect x="112" y="145" width="76" height="55" rx="8" fill="#0f172a" stroke="#4ade80" strokeWidth="1.5" />
+                  <circle cx="150" cy="172" r="22" fill="#0f172a" stroke="#22d3ee" strokeWidth="3" />
+                  <circle cx="150" cy="172" r="16" fill="#22d3ee" opacity="0.3" filter="url(#strongGlow)" className="pulse-glow" />
+                  <circle cx="150" cy="172" r="10" fill="#22d3ee" opacity="0.75" filter="url(#glow)" />
                   <circle cx="150" cy="172" r="5" fill="#ffffff" />
 
                   {/* Shoulder Pads */}
@@ -340,7 +361,7 @@ export default function HomePage() {
                   <ellipse cx="70" cy="246" rx="18" ry="16" fill="url(#metalGrad)" />
                   <g className="pulse-glow" filter="url(#strongGlow)">
                     <ellipse cx="70" cy="268" rx="14" ry="28" fill="url(#jetGrad)" />
-                    <ellipse cx="70" cy="272" rx="8" ry="18" fill="#fef3c7" opacity="0.9" />
+                    <ellipse cx="70" cy="272" rx="8" ry="18" fill="#fef3c7" opacity="0.95" />
                   </g>
 
                   {/* Right Arm */}
@@ -349,7 +370,7 @@ export default function HomePage() {
                   <ellipse cx="230" cy="246" rx="18" ry="16" fill="url(#metalGrad)" />
                   <g className="pulse-glow" filter="url(#strongGlow)">
                     <ellipse cx="230" cy="268" rx="14" ry="28" fill="url(#jetGrad)" />
-                    <ellipse cx="230" cy="272" rx="8" ry="18" fill="#fef3c7" opacity="0.9" />
+                    <ellipse cx="230" cy="272" rx="8" ry="18" fill="#fef3c7" opacity="0.95" />
                   </g>
 
                   {/* Hip */}
@@ -361,7 +382,7 @@ export default function HomePage() {
                   <ellipse cx="120" cy="358" rx="22" ry="14" fill="url(#metalGrad)" />
                   <g className="pulse-glow" filter="url(#strongGlow)">
                     <ellipse cx="120" cy="378" rx="16" ry="32" fill="url(#jetGrad)" />
-                    <ellipse cx="120" cy="382" rx="9" ry="20" fill="#fef3c7" opacity="0.9" />
+                    <ellipse cx="120" cy="382" rx="9" ry="20" fill="#fef3c7" opacity="0.95" />
                   </g>
 
                   {/* Right Leg */}
@@ -370,12 +391,12 @@ export default function HomePage() {
                   <ellipse cx="180" cy="358" rx="22" ry="14" fill="url(#metalGrad)" />
                   <g className="pulse-glow" filter="url(#strongGlow)">
                     <ellipse cx="180" cy="378" rx="16" ry="32" fill="url(#jetGrad)" />
-                    <ellipse cx="180" cy="382" rx="9" ry="20" fill="#fef3c7" opacity="0.9" />
+                    <ellipse cx="180" cy="382" rx="9" ry="20" fill="#fef3c7" opacity="0.95" />
                   </g>
 
                   {/* Accent Lines */}
-                  <path d="M92 180 L82 210" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow)" />
-                  <path d="M208 180 L218 210" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow)" />
+                  <path d="M92 180 L82 210" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" filter="url(#glow)" />
+                  <path d="M208 180 L218 210" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" filter="url(#glow)" />
                 </svg>
               </div>
             </div>
@@ -384,7 +405,7 @@ export default function HomePage() {
       </main>
 
       {/* Bottom Gradient */}
-      <div className="fixed bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none" />
+      <div className="fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none" />
     </div>
   );
 }
