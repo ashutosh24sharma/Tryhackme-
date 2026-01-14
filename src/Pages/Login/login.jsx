@@ -119,15 +119,15 @@ const Navbar = ({ onNavigate }) => {
             </div>
             <div className="mt-4 pt-4 border-t border-slate-800 flex flex-col gap-3 px-4">
               <button
-                onClick={() => {
-                  onNavigate('/login');
-                  setIsMenuOpen(false);
-                }}
-                className="w-full py-3 text-center text-emerald-400 border border-emerald-400/50 
-                         rounded-full font-medium"
-              >
-                Log In
-              </button>
+      onClick={() => {
+        navigate("/login");
+        setIsMenuOpen(false);
+      }}
+      className="w-full py-3 text-center text-emerald-400 border border-emerald-400/50 
+                 rounded-full font-medium"
+    >
+      Log In
+    </button>
               <button
                 onClick={() => {
                   onNavigate('/signup');
