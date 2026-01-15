@@ -1,129 +1,138 @@
 // pages/Signup.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Eye,
-  EyeOff,
-  Check,
-  User,
-  Mail,
-  KeyRound,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { Eye, EyeOff, User, Mail, KeyRound } from "lucide-react";
 
 const Signup = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    // fake API delay
-    await new Promise((r) => setTimeout(r, 1500));
-
+    await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);
-    navigate("/login"); // redirect after signup
+    navigate("/login");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
+    <div className="min-h-screen relative flex items-center justify-center px-4 overflow-hidden">
 
+      {/* Same Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0b1c3d] via-[#0f2a5c] to-[#0b1c3d]" />
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+      <div className="absolute left-24 bottom-40 w-3 h-3 bg-cyan-400 rounded-full opacity-70" />
+
+      {/* Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-md bg-white rounded-2xl shadow-2xl p-8"
+      >
         {/* Header */}
-        <div className="text-center mb-6">
-          <div className="mx-auto w-14 h-14 flex items-center justify-center rounded-full bg-emerald-500">
-            <User className="w-7 h-7 text-white" />
+        <div className="text-center mb-8">
+          <div className="mx-auto w-14 h-14 flex items-center justify-center rounded-full bg-indigo-100">
+            <User className="text-indigo-600" size={26} />
           </div>
-          <h1 className="text-2xl font-bold mt-4">Create account</h1>
-          <p className="text-gray-500">Join us in seconds</p>
+          <h1 className="text-3xl font-semibold text-gray-900 mt-4">
+            Create account
+          </h1>
+          <p className="text-gray-500 text-base mt-1">
+            It takes less than a minute
+          </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name */}
-          <div className="relative">
-            <User className="absolute left-3 top-3 text-gray-400" />
-            <input
-              required
-              type="text"
-              placeholder="Full name"
-              className="w-full pl-10 py-3 border rounded-xl 
-                         focus:outline-none focus:ring-2 focus:ring-emerald-400"
-            />
+          <div>
+            <label className="block text-base text-gray-600 mb-1">
+              Full name
+            </label>
+            <div className="relative">
+              <User className="absolute left-3 top-3 text-gray-400" />
+              <input
+                type="text"
+                required
+                className="w-full pl-10 py-3 text-base border rounded-lg
+                           focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              />
+            </div>
           </div>
 
           {/* Email */}
-          <div className="relative">
-            <Mail className="absolute left-3 top-3 text-gray-400" />
-            <input
-              required
-              type="email"
-              placeholder="Email"
-              className="w-full pl-10 py-3 border rounded-xl 
-                         focus:outline-none focus:ring-2 focus:ring-emerald-400"
-            />
+          <div>
+            <label className="block text-base text-gray-600 mb-1">
+              Email
+            </label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-3 text-gray-400" />
+              <input
+                type="email"
+                required
+                className="w-full pl-10 py-3 text-base border rounded-lg
+                           focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              />
+            </div>
           </div>
 
           {/* Password */}
-          <div className="relative">
-            <KeyRound className="absolute left-3 top-3 text-gray-400" />
-            <input
-              required
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              className="w-full pl-10 pr-10 py-3 border rounded-xl 
-                         focus:outline-none focus:ring-2 focus:ring-emerald-400"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-3 text-gray-400"
-            >
-              {showPassword ? <EyeOff /> : <Eye />}
-            </button>
+          <div>
+            <label className="block text-base text-gray-600 mb-1">
+              Password
+            </label>
+            <div className="relative">
+              <KeyRound className="absolute left-3 top-3 text-gray-400" />
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                className="w-full pl-10 pr-10 py-3 text-base border rounded-lg
+                           focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3 text-gray-400"
+              >
+                {showPassword ? <EyeOff /> : <Eye />}
+              </button>
+            </div>
           </div>
 
-          {/* Fake reCAPTCHA */}
-          <button
-            type="button"
-            onClick={() => setChecked(!checked)}
-            className="flex items-center gap-2 text-sm text-gray-600"
-          >
-            <div
-              className={`w-5 h-5 border rounded flex items-center justify-center ${
-                checked ? "bg-emerald-500 border-emerald-500" : ""
-              }`}
-            >
-              {checked && <Check className="w-4 h-4 text-white" />}
-            </div>
-            I'm not a robot
-          </button>
-
           {/* Submit */}
-          <button
-            disabled={!checked || loading}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            disabled={loading}
             type="submit"
-            className="w-full py-3 bg-emerald-500 text-white rounded-xl font-bold
-                       hover:bg-emerald-600 transition disabled:opacity-50"
+            className="w-full py-3 bg-indigo-600 text-white rounded-lg
+                       text-lg font-medium hover:bg-indigo-700 transition"
           >
             {loading ? "Creating account..." : "Sign Up"}
-          </button>
+          </motion.button>
         </form>
 
-        {/* Login link */}
-        <p className="text-center mt-6 text-gray-500">
+        {/* Footer */}
+        <p className="text-center text-base text-gray-500 mt-6">
           Already have an account?{" "}
           <button
             onClick={() => navigate("/login")}
-            className="text-emerald-600 font-semibold hover:underline"
+            className="text-indigo-600 font-medium hover:underline"
           >
-            Log In
+            Log in
           </button>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };
