@@ -12,8 +12,7 @@ export default function HomePage() {
     { name: 'Practice', path: '/practice' },
     { name: 'Compete', path: '/compete' },
     { name: 'Education', path: '/education' },
-    { name: 'Business', path: '/business' },
-    { name: 'Pricing', path: '/pricing' }
+   
   ];
 
   return (

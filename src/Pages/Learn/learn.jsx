@@ -11,8 +11,7 @@ const Header = () => {
     { name: 'Practice', path: '/practice' },
     { name: 'Compete', path: '/compete' },
     { name: 'Education', path: '/education' },
-    { name: 'Business', path: '/business' },
-    { name: 'Pricing', path: '/pricing' },
+   
   ];
 
   return (
@@ -81,8 +80,8 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-gray-700">
-            <div className="flex flex-col space-y-4 pt-4">
+          <div className="absolute top-full left-0 right-0 bg-slate-900/98 pb-5 backdrop-blur-xl border-t border-gray-700 lg:hidden shadow-2xl z-50">
+            <div className="flex flex-col pl-5 space-y-4 pt-4">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
@@ -91,7 +90,7 @@ const Header = () => {
                   className={({ isActive }) =>
                     `font-medium transition-colors ${
                       isActive ? 'text-green-400' : 'text-gray-300 hover:text-white'
-                    }`
+                    }` 
                   }
                 >
                   {link.name}
@@ -105,13 +104,7 @@ const Header = () => {
                 >
                   Log In
                 </Link>
-                <Link
-                  to="/signup"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-6 py-2 bg-green-500 text-white font-semibold rounded-full hover:bg-green-400 transition-colors text-center"
-                >
-                  Join for FREE
-                </Link>
+                
               </div>
             </div>
           </div>
