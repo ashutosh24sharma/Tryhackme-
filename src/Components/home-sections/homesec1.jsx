@@ -10,7 +10,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   const containerRef = useRef(null);
 
-  const words = ['CYBER SECUIRITY'];
+  const words = ['CYBER SECURITY'];
 
   // Typing effect
   useEffect(() => {
