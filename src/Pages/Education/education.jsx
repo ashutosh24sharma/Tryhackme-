@@ -66,7 +66,7 @@ const labSuggestionsData = [
 
 const testimonialsData = [
   {
-    quote: "TryHackMe has transformed how we teach cybersecurity. The hands-on labs provide students with real-world experience that textbooks simply cannot match.",
+    quote: "HackYard has transformed how we teach cybersecurity. The hands-on labs provide students with real-world experience that textbooks simply cannot match.",
     author: "Dr. Sarah Johnson",
     role: "Head of Cybersecurity Department",
     org: "Stanford University",
@@ -102,8 +102,8 @@ const categoryTags = [
 
 const pricingFeatures = [
   { feature: 'Unlimited access to 1.1k+ browser-based labs*', premium: true, education: true },
-  { feature: 'Unlimited access to TryHackMe premium content', premium: true, education: true },
-  { feature: 'Access to TryHackMe learning paths', premium: true, education: true },
+  { feature: 'Unlimited access to HackYard premium content', premium: true, education: true },
+  { feature: 'Access to HackYard learning paths', premium: true, education: true },
   { feature: 'Management dashboard to track students progress', premium: false, education: true },
   { feature: 'Create assignments', premium: false, education: true },
   { feature: 'Flexible user seats', premium: false, education: true },
@@ -132,7 +132,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[90vh] bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden">
+    <section className="relative min-h-[90vh] mt-20 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse" />
@@ -144,7 +144,7 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className="text-center lg:text-left animate-fade-in">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              TryHackMe{' '}
+              HackYard{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500">
                 Classrooms
               </span>
@@ -414,7 +414,7 @@ const LabSuggestionsSection = () => {
                 <tr className="bg-gray-50 border-b border-gray-200">
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 w-20">Week</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Learning Objective</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">TryHackMe Lab Suggestions</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">HackYard Lab Suggestions</th>
                 </tr>
               </thead>
               <tbody>
@@ -602,7 +602,7 @@ const ShareSwagSection = () => {
           {/* Left Content */}
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Share TryHackMe Labs & Get Swag!
+              Share HackYard Labs & Get Swag!
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-green-500 rounded-full mb-6" />
             <p className="text-gray-600 text-lg mb-6">
@@ -610,17 +610,17 @@ const ShareSwagSection = () => {
               It's our way of saying thanks for spreading the word!
             </p>
             <p className="text-gray-600 text-lg mb-8">
-              Share TryHackMe with your company, university, or college and earn exclusive
+              Share HackYard with your company, university, or college and earn exclusive
               merchandise as a reward.
             </p>
 
             {/* Share Message Box */}
             <div className="bg-slate-900 rounded-2xl p-6 shadow-xl hover:scale-[1.01] transition-transform duration-300">
               <p className="text-white text-sm leading-relaxed mb-4 font-mono">
-                "Check out TryHackMe Classrooms! It has pre-built security labs, progress
+                "Check out HackYard Classrooms! It has pre-built security labs, progress
                 monitoring, gamified walkthroughs, and smart lab recommendations. Perfect
                 for teaching cybersecurity!
-                <span className="text-green-400"> tryhackme.com/classrooms</span>"
+                <span className="text-green-400"> HackYard.com/classrooms</span>"
               </p>
             </div>
 
@@ -641,7 +641,7 @@ const ShareSwagSection = () => {
                   <div className="text-white">
                     <p className="text-2xl">☁️</p>
                     <p className="font-mono text-xs text-gray-400">01010100 01001000 01001101</p>
-                    <p className="text-green-400 font-bold mt-2">TryHackMe</p>
+                    <p className="text-green-400 font-bold mt-2">HackYard</p>
                   </div>
                 </div>
               </div>
@@ -797,14 +797,14 @@ const BookMeetingSection = () => {
               <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-green-500 rounded-full mb-6" />
 
               <p className="text-gray-300 text-lg mb-6">
-                Learn how TryHackMe can enhance your cyber security education with tailored
+                Learn how HackYard can enhance your cyber security education with tailored
                 solutions, engaging learning paths, and hands-on training for students and educators.
               </p>
 
               <p className="text-gray-400 text-sm mb-8">
                 For general enquiries contact us on{' '}
-                <a href="mailto:education@tryhackme.com" className="text-blue-400 hover:underline">
-                  education@tryhackme.com
+                <a href="mailto:education@HackYard.com" className="text-blue-400 hover:underline">
+                  education@HackYard.com
                 </a>
               </p>
 

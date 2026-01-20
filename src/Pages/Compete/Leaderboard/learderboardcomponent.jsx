@@ -475,7 +475,7 @@ const LeaderboardHero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-[400px] overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#0f1c2e] to-[#0d1526]">
+    <div className="relative min-h-[400px] mt-15 overflow-hidden bg-gradient-to-b from-[#0b1220] via-[#0f1c2e] to-[#0d1526]">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
       
       <div className="absolute inset-0 bg-gradient-to-r from-[#a3e635]/5 via-transparent to-[#22d3ee]/5" />

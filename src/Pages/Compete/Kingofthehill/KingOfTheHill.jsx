@@ -90,7 +90,7 @@ const faqData = [
   },
   {
     question: 'Who can play?',
-    answer: 'Anyone with a TryHackMe account can participate in King of the Hill games. Premium members get access to exclusive machines and private game creation. Free users can join public games and compete for rankings.',
+    answer: 'Anyone with a HackYard account can participate in King of the Hill games. Premium members get access to exclusive machines and private game creation. Free users can join public games and compete for rankings.',
   },
   {
     question: 'Joining Public Games',
@@ -102,7 +102,7 @@ const faqData = [
   },
   {
     question: 'Inviting your friends',
-    answer: 'When creating a private game, you will receive a unique game code. Share this code with friends to invite them. You can also send direct invites to TryHackMe users. Private lobbies support up to 20 players.',
+    answer: 'When creating a private game, you will receive a unique game code. Share this code with friends to invite them. You can also send direct invites to HackYard users. Private lobbies support up to 20 players.',
   },
   {
     question: 'Spectators',
@@ -118,7 +118,7 @@ const faqData = [
   },
   {
     question: 'Tips and Tricks',
-    answer: 'Stay updated with the latest CVEs and exploits. Practice on regular TryHackMe rooms first. Learn both offensive and defensive techniques. Monitor the scoreboard and adapt your strategy. Patch vulnerabilities after gaining access.',
+    answer: 'Stay updated with the latest CVEs and exploits. Practice on regular HackYard rooms first. Learn both offensive and defensive techniques. Monitor the scoreboard and adapt your strategy. Patch vulnerabilities after gaining access.',
   },
   {
     question: 'Feedback and Reporting',
@@ -129,7 +129,7 @@ const faqData = [
 const howToPlaySteps = [
   { step: 1, title: 'Join a lobby', description: 'Enter a public game or create a private lobby with friends' },
   { step: 2, title: 'Hack', description: 'Find vulnerabilities and exploit them to gain access to the machine' },
-  { step: 3, title: 'Record your username', description: 'Place your TryHackMe username in /root/king.txt to become King' },
+  { step: 3, title: 'Record your username', description: 'Place your HackYard username in /root/king.txt to become King' },
   { step: 4, title: 'Patch vulnerabilities', description: 'Secure the machine to prevent others from taking your crown' },
   { step: 5, title: 'Earn points', description: 'Accumulate points by staying King and finding flags' },
   { step: 6, title: 'Hunt for flags', description: 'Discover hidden flags throughout the system for bonus points' },
@@ -591,7 +591,7 @@ const KingOfTheHill = () => {
               </h2>
               
               <p className="text-gray-400 leading-relaxed mb-8">
-                King of the Hill is TryHackMe's competitive hacking arena where players battle 
+                King of the Hill is HackYard's competitive hacking arena where players battle 
                 to maintain control of vulnerable machines. Test your offensive and defensive 
                 skills against other hackers in real-time combat scenarios.
               </p>
