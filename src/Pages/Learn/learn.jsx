@@ -1,118 +1,5 @@
-// learn.jsx
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-
-// Header Component
-const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { name: 'Learn', path: '/learn' },
-    { name: 'Practice', path: '/practice' },
-    { name: 'Compete', path: '/compete' },
-    { name: 'Education', path: '/education' },
-   
-  ];
-
-  return (
-    <header className="absolute top-0 left-0 right-0 z-50">
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity">
-            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <span className="text-white font-bold text-xl">TryHackMe</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `font-medium transition-colors ${
-                    isActive
-                      ? 'text-green-400 hover:text-green-300'
-                      : 'text-gray-300 hover:text-white'
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
-          </div>
-
-          {/* Auth Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Link
-              to="/login"
-              className="px-6 py-2 text-white border border-gray-500 rounded-full hover:border-white hover:bg-white/10 transition-all duration-300"
-            >
-              Log In
-            </Link>
-            <Link
-              to="/signup"
-              className="px-6 py-2 bg-green-500 text-white font-semibold rounded-full hover:bg-green-400 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300"
-            >
-              Join for FREE
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden text-white p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-slate-900/98 pb-5 backdrop-blur-xl border-t border-gray-700 lg:hidden shadow-2xl z-50">
-            <div className="flex flex-col pl-5 space-y-4 pt-4">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `font-medium transition-colors ${
-                      isActive ? 'text-green-400' : 'text-gray-300 hover:text-white'
-                    }` 
-                  }
-                >
-                  {link.name}
-                </NavLink>
-              ))}
-              <div className="flex flex-col space-y-3 pt-4 border-t border-gray-700">
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-6 py-2 text-white border border-gray-500 rounded-full hover:border-white transition-colors text-center"
-                >
-                  Log In
-                </Link>
-                
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
-    </header>
-  );
-};
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Hero Section Component - Enhanced
 const HeroSection = () => {
@@ -142,8 +29,6 @@ const HeroSection = () => {
           backgroundSize: '50px 50px'
         }}
       ></div>
-
-      <Header />
 
       <div className="container mx-auto px-6 pt-28 pb-16 lg:pt-32">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
@@ -202,8 +87,6 @@ const HeroSection = () => {
                 </div>
               ))}
             </div>
-
-           
           </div>
 
           {/* Right Content - Enhanced 3D Laptop Illustration */}
@@ -315,8 +198,6 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-
-      
       </div>
 
       {/* Custom Animations */}
@@ -400,7 +281,7 @@ const RoadmapCard = ({ title, description, badge, difficulty, color = 'blue', pa
   );
 };
 
-// Featured Courses Section (NEW)
+// Featured Courses Section
 const FeaturedCourses = () => {
   const courses = [
     {
@@ -737,233 +618,6 @@ const LearningRoadmap = () => {
   );
 };
 
-// Footer Component
-const Footer = () => {
-  const footerLinks = {
-    learning: [
-      { name: 'Hands-on labs', path: '/labs' },
-      { name: 'For Business', path: '/business' },
-      { name: 'For Education', path: '/education' },
-      { name: 'Competitive Hacking', path: '/compete' },
-      { name: 'Defensive Certifications', path: '/certifications' },
-    ],
-    resources: [
-      { name: 'About Us', path: '/about' },
-      { name: 'Newsroom', path: '/newsroom' },
-      { name: 'Blog', path: '/blog' },
-      { name: 'Glossary', path: '/glossary' },
-      { name: 'Work at TryHackMe', path: '/careers' },
-      { name: 'Careers in Cyber', path: '/cyber-careers' },
-    ],
-    shop: [
-      { name: 'Buy Vouchers', path: '/vouchers' },
-      { name: 'Swag Shop', path: '/shop' },
-    ],
-    contact: [
-      { name: 'Contact Us', path: '/contact' },
-      { name: 'Forum', path: '/forum' },
-    ],
-  };
-
-  const policyLinks = [
-    { name: 'Privacy Policy', path: '/privacy' },
-    { name: 'Terms of Use', path: '/terms' },
-    { name: 'AI Terms of Use', path: '/ai-terms' },
-    { name: 'Acceptable Use Policy', path: '/acceptable-use' },
-    { name: 'Cookie Policy', path: '/cookies' },
-  ];
-
-  const socialLinks = [
-    {
-      name: 'X',
-      href: 'https://twitter.com/tryhackme',
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      )
-    },
-    {
-      name: 'LinkedIn',
-      href: 'https://linkedin.com/company/tryhackme',
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-        </svg>
-      )
-    },
-    {
-      name: 'Discord',
-      href: 'https://discord.gg/tryhackme',
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
-        </svg>
-      )
-    },
-    {
-      name: 'Facebook',
-      href: 'https://facebook.com/tryhackme',
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-        </svg>
-      )
-    },
-    {
-      name: 'YouTube',
-      href: 'https://youtube.com/tryhackme',
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-        </svg>
-      )
-    },
-    {
-      name: 'Instagram',
-      href: 'https://instagram.com/tryhackme',
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-        </svg>
-      )
-    },
-  ];
-
-  return (
-    <footer className="bg-gradient-to-b from-slate-900 to-slate-950 border-t border-gray-800/50">
-      <div className="container mx-auto px-6 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Learning Column */}
-          <div>
-            <h4 className="text-white font-semibold text-lg mb-5">Learning</h4>
-            <ul className="space-y-3">
-              {footerLinks.learning.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources Column */}
-          <div>
-            <h4 className="text-white font-semibold text-lg mb-5">Resources</h4>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Shop Column */}
-          <div>
-            <h4 className="text-white font-semibold text-lg mb-5">Shop</h4>
-            <ul className="space-y-3">
-              {footerLinks.shop.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Get in touch Column */}
-          <div>
-            <h4 className="text-white font-semibold text-lg mb-5">Get in touch</h4>
-            <ul className="space-y-3">
-              {footerLinks.contact.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Brand Section */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-4 hover:opacity-90 transition-opacity">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center shadow-lg shadow-green-500/20">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-              </div>
-              <span className="text-white font-bold text-xl">TryHackMe</span>
-            </Link>
-            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-              We're a gamified, hands-on cyber security training platform that you can access through your browser.
-            </p>
-            <p className="text-gray-500 text-xs">
-              123 Security Street, London, UK
-            </p>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            {/* Copyright */}
-            <div className="text-gray-500 text-sm order-3 lg:order-1">
-              © TryHackMe 2018–2026
-            </div>
-
-            {/* Policy Links */}
-            <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm order-2">
-              {policyLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  to={link.path}
-                  className="text-gray-500 hover:text-white transition-colors duration-200"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Social Icons */}
-            <div className="flex items-center space-x-4 order-1 lg:order-3">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-white transition-colors duration-200"
-                  aria-label={social.name}
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
 // Main Learn Page Component
 const Learn = () => {
   return (
@@ -971,7 +625,6 @@ const Learn = () => {
       <HeroSection />
       <FeaturedCourses />
       <LearningRoadmap />
-      <Footer />
     </div>
   );
 };

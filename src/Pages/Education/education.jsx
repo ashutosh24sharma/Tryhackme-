@@ -1,15 +1,7 @@
 // src/Pages/Education/education.jsx
 import React, { useState, useEffect } from 'react';
 
-// ============ NAVIGATION DATA ============
-const navigationLinks = [
-  { name: 'Learn', href: '/learn' },
-  { name: 'Practice', href: '/practice' },
-  { name: 'Compete', href: '/compete' },
-  { name: 'Education', href: '/education', isActive: true },
-  
-];
-
+// ============ DATA ============
 const trustedLogos = ['CompTIA', 'Google', 'EPITECH', 'Education Scotland', 'KPMG'];
 
 const featureCardsData = [
@@ -120,169 +112,6 @@ const pricingFeatures = [
   { feature: 'Onboarding and ongoing support', premium: false, education: true },
   { feature: 'Create customised learning paths', premium: false, education: true },
 ];
-
-// ============ HEADER COMPONENT ============
-const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setMobileMenuOpen(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [mobileMenuOpen]);
-
-  return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-slate-900/95 backdrop-blur-md shadow-lg shadow-black/20'
-          : 'bg-slate-900'
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
-              <span className="text-white font-bold text-xl">T</span>
-            </div>
-            <span className="text-white font-bold text-xl hidden sm:block group-hover:text-green-400 transition-colors duration-200">
-              TryHackMe
-            </span>
-          </a>
-
-          {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center gap-1">
-            {navigationLinks.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    link.isActive
-                      ? 'bg-green-500/20 text-green-400'
-                      : 'text-gray-300 hover:text-white hover:bg-slate-800'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          {/* Desktop Auth Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="/login"
-              className="px-5 py-2 rounded-lg text-white border border-slate-600 hover:border-green-400 hover:text-green-400 transition-all duration-200"
-            >
-              Log In
-            </a>
-            <a
-              href="/signup"
-              className="px-5 py-2 rounded-lg bg-gradient-to-r from-green-400 to-green-500 text-slate-900 font-semibold hover:from-green-300 hover:to-green-400 transition-all duration-200"
-            >
-              Join for FREE
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden relative w-10 h-10 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors duration-200"
-          >
-            <div className="w-5 h-4 flex flex-col justify-between">
-              <span
-                className={`block h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center ${
-                  mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''
-                }`}
-              />
-              <span
-                className={`block h-0.5 bg-white rounded-full transition-all duration-300 ${
-                  mobileMenuOpen ? 'opacity-0 scale-0' : ''
-                }`}
-              />
-              <span
-                className={`block h-0.5 bg-white rounded-full transition-all duration-300 transform origin-center ${
-                  mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
-                }`}
-              />
-            </div>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <>
-            <div
-              className="fixed inset-0 top-16 bg-black/50 backdrop-blur-sm lg:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            <div className="absolute top-16 left-0 right-0 bg-slate-800 border-t border-slate-700 lg:hidden shadow-xl">
-              <ul className="px-4 py-4 space-y-1">
-                {navigationLinks.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
-                        link.isActive
-                          ? 'bg-green-500/20 text-green-400 border-l-4 border-green-400'
-                          : 'text-gray-300 hover:bg-slate-700 hover:text-white'
-                      }`}
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div className="px-4 pb-6 pt-2 space-y-3 border-t border-slate-700">
-                <a
-                  href="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full px-4 py-3 rounded-lg text-white border border-slate-600 text-center font-medium hover:border-green-400 hover:text-green-400 transition-all duration-200"
-                >
-                  Log In
-                </a>
-                <a
-                  href="/signup"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full px-4 py-3 rounded-lg bg-gradient-to-r from-green-400 to-green-500 text-slate-900 text-center font-semibold transition-all duration-200"
-                >
-                  Join for FREE
-                </a>
-              </div>
-            </div>
-          </>
-        )}
-      </nav>
-    </header>
-  );
-};
 
 // ============ HERO SECTION ============
 const HeroSection = () => {
@@ -1008,43 +837,10 @@ const BookMeetingSection = () => {
   );
 };
 
-// ============ FOOTER COMPONENT ============
-const Footer = () => {
-  return (
-    <footer className="bg-slate-900 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">T</span>
-            </div>
-            <span className="text-white font-bold text-xl">TryHackMe</span>
-          </div>
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} TryHackMe. All rights reserved.
-          </p>
-          <div className="flex gap-4">
-            {['Twitter', 'LinkedIn', 'Discord'].map((social) => (
-              <a
-                key={social}
-                href="#"
-                className="text-gray-400 hover:text-green-400 transition-colors duration-200"
-              >
-                {social}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
 // ============ MAIN EDUCATION PAGE COMPONENT ============
 const Education = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <main>
         <HeroSection />
         <TrustedBySection />
@@ -1058,7 +854,6 @@ const Education = () => {
         <PricingSection />
         <BookMeetingSection />
       </main>
-      <Footer />
     </div>
   );
 };

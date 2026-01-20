@@ -2,18 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [email, setEmail] = useState('');
-
   const navigate = useNavigate();
-
-  const menuItems = [
-    { name: 'Learn', path: '/learn' },
-    { name: 'Practice', path: '/practice' },
-    { name: 'Compete', path: '/compete' },
-    { name: 'Education', path: '/education' },
-   
-  ];
 
   return (
     <div className="h-screen w-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 font-sans antialiased overflow-hidden">
@@ -67,114 +57,6 @@ export default function HomePage() {
 
       {/* Main Container */}
       <div className="h-full flex flex-col">
-        {/* Navigation */}
-        <nav className="relative z-50 flex items-center justify-between px-4 sm:px-6 lg:px-12 xl:px-20 py-3 lg:py-4 flex-shrink-0">
-          {/* Logo */}
-          <div 
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 lg:gap-3 cursor-pointer group"
-          >
-            <svg className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12" viewBox="0 0 40 40" fill="none">
-              <defs>
-                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#22d3ee" />
-                  <stop offset="100%" stopColor="#4ade80" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M32 22c0-3.5-2.8-6.3-6.3-6.3-.8 0-1.6.1-2.3.4C22.1 12.5 18.6 10 14.5 10 9.3 10 5 14.3 5 19.5c0 .4 0 .7.1 1.1C3.2 21.5 2 23.6 2 26c0 3.3 2.7 6 6 6h20c3.3 0 6-2.7 6-6 0-2-1-3.8-2.6-4.9-.2-.4-.3-.7-.4-1.1z"
-                fill="url(#logoGrad)"
-              />
-              <text x="10" y="25" fill="#0f172a" fontSize="8" fontFamily="monospace" fontWeight="bold">
-                0110
-              </text>
-            </svg>
-            <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white group-hover:scale-105 transition-transform">
-              Try<span className="text-green-400">Hack</span>Me
-            </span>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {menuItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => navigate(item.path)}
-                className="text-gray-300 hover:text-green-400 transition-all duration-300 font-semibold text-sm xl:text-base relative group"
-              >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-400 to-cyan-400 group-hover:w-full transition-all duration-300" />
-              </button>
-            ))}
-          </div>
-
-          {/* Auth Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={() => navigate("/login")}
-              className="hidden sm:block px-4 lg:px-6 py-2 border-2 border-green-400 
-                         text-green-400 rounded-full hover:bg-green-400 
-                         hover:text-slate-900 transition-all duration-300 font-bold text-sm lg:text-base
-                         hover:scale-105 active:scale-95"
-            >
-              Log In
-            </button>
-
-            <button  
-              onClick={() => navigate("/signup")}
-              className="px-4 sm:px-6 lg:px-8 py-2 text-sm lg:text-base bg-gradient-to-r from-green-400 
-                         to-green-500 text-slate-900 rounded-full font-bold 
-                         transition-all duration-300 active:scale-95 
-                         hover:shadow-xl hover:shadow-green-400/50 hover:scale-105"
-            >
-              Join for FREE
-            </button>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              className="lg:hidden p-2 text-gray-300 hover:text-green-400 transition-colors rounded-lg hover:bg-slate-800/50"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="absolute top-full left-0 right-0 bg-slate-900/98 backdrop-blur-xl border-t border-gray-700 lg:hidden shadow-2xl z-50">
-              <div className="flex flex-col p-4 gap-2">
-                {menuItems.map((item) => (
-                  <button
-                    key={item.name}
-                    onClick={() => {
-                      navigate(item.path);
-                      setMobileMenuOpen(false);
-                    }}
-                    className="text-gray-300 hover:text-green-400 transition-colors font-semibold text-base py-3 px-4 rounded-xl hover:bg-slate-800/70 text-left"
-                  >
-                    {item.name}
-                  </button>
-                ))}
-                <button 
-                  onClick={() => {
-                    navigate("/login");
-                    setMobileMenuOpen(false);
-                  }}
-                  className="sm:hidden mt-2 px-6 py-3 border-2 border-green-400 text-green-400 rounded-full font-bold text-base hover:bg-green-400 hover:text-slate-900 transition-all duration-300"
-                >
-                  Log In
-                </button>
-              </div>
-            </div>
-          )}
-        </nav>
-
         {/* Hero Section */}
         <main className="relative z-10 flex-1 flex items-center px-4 sm:px-6 lg:px-12 xl:px-20 py-2 lg:py-0">
           <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
@@ -252,13 +134,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Visual - Robot (LARGER SIZE) */}
+            {/* Right Visual - Robot */}
             <div className="flex-shrink-0 order-1 lg:order-2 flex justify-center lg:justify-end">
               <div className="relative">
-                {/* Robot Shadow - Increased size */}
+                {/* Robot Shadow */}
                 <div className="absolute -bottom-6 lg:-bottom-10 left-1/2 w-40 sm:w-52 lg:w-72 xl:w-80 2xl:w-96 h-8 lg:h-12 bg-cyan-400/40 rounded-full blur-2xl shadow-animation" />
 
-                {/* Robot with Float Animation - INCREASED SIZES */}
+                {/* Robot with Float Animation */}
                 <div className="float-animation">
                   <svg
                     className="w-48 h-64 sm:w-64 sm:h-80 md:w-72 md:h-96 lg:w-80 lg:h-[420px] xl:w-96 xl:h-[500px] 2xl:w-[440px] 2xl:h-[580px]"
