@@ -6,18 +6,66 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const [openCompete, setOpenCompete] = useState(false);
-  const dropdownRef = useRef(null);
+  const [openPractice, setOpenPractice] = useState(false);
+  
+  const competeDropdownRef = useRef(null);
+  const practiceDropdownRef = useRef(null);
   const navRef = useRef(null);
 
+  // Regular nav links (without dropdowns)
   const navLinks = [
     { name: "Learn", path: "/learn" },
-    { name: "Practice", path: "/practice" },
     { name: "Education", path: "/education" },
   ];
 
+  // Practice dropdown links
+  const practiceLinks = [
+    { 
+      name: "Challenges", 
+      path: "/practice/challenges",
+      icon: "🚨",
+      description: "Handle security incidents effectively"
+    },
+    { 
+      name: "SOC Simulator", 
+      path: "/practice/soc-simulator",
+      icon: "🛡️",
+      description: "Simulated SOC environment training"
+    },
+    { 
+      name: "Threat Hunting Simulator", 
+      path: "/practice/threat-hunting",
+      icon: "🔍",
+      description: "Hunt real adversary behaviors"
+    },
+    { 
+      name: "Malware Analysis", 
+      path: "/practice/malware-analysis",
+      icon: "🦠",
+      description: "Analyze and reverse engineer malware"
+    },
+    { 
+      name: "Penetration Testing", 
+      path: "/practice/penetration-testing",
+      icon: "💻",
+      description: "Ethical hacking challenges"
+    },
+  ];
+
+  // Compete dropdown links
   const competeLinks = [
-    { name: "King of the Hill", path: "/compete/king-of-the-hill" },
-    { name: "Leaderboard", path: "/compete/leaderboard" },
+    { 
+      name: "King of the Hill", 
+      path: "/compete/king-of-the-hill",
+      icon: "👑",
+      description: "Attack & defend challenges"
+    },
+    { 
+      name: "Leaderboard", 
+      path: "/compete/leaderboard",
+      icon: "🏆",
+      description: "Global rankings"
+    },
   ];
 
   useEffect(() => {
@@ -26,16 +74,21 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close dropdowns when clicking outside
   useEffect(() => {
-    const closeDropdown = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    const closeDropdowns = (e) => {
+      if (competeDropdownRef.current && !competeDropdownRef.current.contains(e.target)) {
         setOpenCompete(false);
       }
+      if (practiceDropdownRef.current && !practiceDropdownRef.current.contains(e.target)) {
+        setOpenPractice(false);
+      }
     };
-    document.addEventListener("mousedown", closeDropdown);
-    return () => document.removeEventListener("mousedown", closeDropdown);
+    document.addEventListener("mousedown", closeDropdowns);
+    return () => document.removeEventListener("mousedown", closeDropdowns);
   }, []);
 
+  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (isOpen && navRef.current && !navRef.current.contains(e.target)) {
@@ -45,6 +98,12 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [isOpen]);
+
+  // Close all dropdowns when route changes or mobile menu closes
+  const closeAllDropdowns = () => {
+    setOpenCompete(false);
+    setOpenPractice(false);
+  };
 
   const CloudIcon = () => (
     <img
@@ -89,6 +148,16 @@ const Navbar = () => {
     </svg>
   );
 
+  // Check if any practice link is active
+  const isPracticeActive = practiceLinks.some(link => 
+    window.location.pathname.startsWith(link.path)
+  );
+
+  // Check if any compete link is active
+  const isCompeteActive = competeLinks.some(link => 
+    window.location.pathname.startsWith(link.path)
+  );
+
   return (
     <nav
       ref={navRef}
@@ -98,92 +167,248 @@ const Navbar = () => {
           : "bg-gradient-to-r from-[#12122a] via-[#141b2d] to-[#0f1d32]"
       }`}
     >
-      {/* ✅ Main Navbar Container */}
+      {/* Main Navbar Container */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        {/* ✅ Mobile height: h-16 | Desktop height: h-20 */}
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* ✅ Logo */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group flex-shrink-0">
             <div className="relative">
               <CloudIcon />
               <div className="absolute inset-0 bg-[#88cc14] blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
             </div>
-
-            {/* ✅ Mobile font smaller, Desktop bigger */}
             <span className="text-white font-bold text-lg md:text-2xl tracking-wide leading-none">
               <span className="text-[#88cc14]">Hack</span>Yard
             </span>
           </Link>
 
-          {/* ✅ Desktop Nav */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.name}
-                to={link.path}
-                className={({ isActive }) =>
-                  `relative px-4 py-2 text-[15px] font-semibold transition-all duration-300 rounded-lg group ${
-                    isActive ? "text-white" : "text-gray-400 hover:text-white"
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <span className="relative z-10">{link.name}</span>
-                    <span
-                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#88cc14] transition-all duration-300 ${
-                        isActive
-                          ? "w-3/4 opacity-100"
-                          : "w-0 opacity-0 group-hover:w-3/4 group-hover:opacity-100"
-                      }`}
-                    />
-                    {isActive && <span className="absolute inset-0 bg-[#88cc14]/10 rounded-lg" />}
-                  </>
-                )}
-              </NavLink>
-            ))}
+            {/* Learn Link */}
+            <NavLink
+              to="/learn"
+              className={({ isActive }) =>
+                `relative px-4 py-2 text-[15px] font-semibold transition-all duration-300 rounded-lg group ${
+                  isActive ? "text-white" : "text-gray-400 hover:text-white"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <span className="relative z-10">Learn</span>
+                  <span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#88cc14] transition-all duration-300 ${
+                      isActive
+                        ? "w-3/4 opacity-100"
+                        : "w-0 opacity-0 group-hover:w-3/4 group-hover:opacity-100"
+                    }`}
+                  />
+                  {isActive && <span className="absolute inset-0 bg-[#88cc14]/10 rounded-lg" />}
+                </>
+              )}
+            </NavLink>
 
-            {/* ✅ Desktop Compete Dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            {/* Practice Dropdown */}
+            <div className="relative" ref={practiceDropdownRef}>
               <button
-                onClick={() => setOpenCompete((prev) => !prev)}
-                onMouseEnter={() => setOpenCompete(true)}
-                className="relative px-4 py-2 text-[15px] font-semibold text-gray-400 hover:text-white transition-all duration-300 rounded-lg group flex items-center gap-1"
+                onClick={() => {
+                  setOpenPractice((prev) => !prev);
+                  setOpenCompete(false);
+                }}
+                onMouseEnter={() => {
+                  setOpenPractice(true);
+                  setOpenCompete(false);
+                }}
+                className={`relative px-4 py-2 text-[15px] font-semibold transition-all duration-300 rounded-lg group flex items-center gap-1 ${
+                  isPracticeActive ? "text-white" : "text-gray-400 hover:text-white"
+                }`}
+              >
+                <span className="relative z-10">Practice</span>
+                <ChevronDown open={openPractice} />
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#88cc14] transition-all duration-300 ${
+                    isPracticeActive
+                      ? "w-3/4 opacity-100"
+                      : "w-0 opacity-0 group-hover:w-3/4 group-hover:opacity-100"
+                  }`}
+                />
+                {isPracticeActive && <span className="absolute inset-0 bg-[#88cc14]/10 rounded-lg" />}
+              </button>
+
+              {/* Practice Dropdown Menu */}
+              <div
+                onMouseLeave={() => setOpenPractice(false)}
+                className={`absolute top-14 left-0 w-72 rounded-xl overflow-hidden border border-white/10 bg-[#0b1220]/95 backdrop-blur-xl shadow-2xl transition-all duration-300 ${
+                  openPractice
+                    ? "opacity-100 translate-y-0 pointer-events-auto"
+                    : "opacity-0 -translate-y-2 pointer-events-none"
+                }`}
+              >
+                {/* Dropdown Header */}
+                <div className="px-4 py-3 border-b border-white/10 bg-white/5">
+                  <h3 className="text-white font-semibold text-sm">Practice Labs</h3>
+                  <p className="text-gray-500 text-xs mt-0.5">Hands-on security training</p>
+                </div>
+
+                {/* Dropdown Links */}
+                <div className="py-2">
+                  {practiceLinks.map((item) => (
+                    <NavLink
+                      key={item.name}
+                      to={item.path}
+                      onClick={() => {
+                        setOpenPractice(false);
+                        closeAllDropdowns();
+                      }}
+                      className={({ isActive }) =>
+                        `flex items-start gap-3 px-4 py-3 transition-all duration-200 ${
+                          isActive
+                            ? "bg-[#88cc14]/15 border-l-2 border-[#88cc14]"
+                            : "hover:bg-white/5 border-l-2 border-transparent"
+                        }`
+                      }
+                    >
+                      {({ isActive }) => (
+                        <>
+                          <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
+                          <div className="min-w-0">
+                            <div className={`text-[14px] font-semibold ${
+                              isActive ? "text-[#88cc14]" : "text-gray-300"
+                            }`}>
+                              {item.name}
+                            </div>
+                            <div className="text-[12px] text-gray-500 mt-0.5 truncate">
+                              {item.description}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </NavLink>
+                  ))}
+                </div>
+
+                {/* Dropdown Footer */}
+                <div className="px-4 py-3 border-t border-white/10 bg-white/5">
+                  <Link
+                    to="/practice"
+                    onClick={() => setOpenPractice(false)}
+                    className="flex items-center justify-between text-[13px] text-[#88cc14] hover:text-[#a3e635] font-medium transition-colors"
+                  >
+                    <span>View all practice labs</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Education Link */}
+            <NavLink
+              to="/education"
+              className={({ isActive }) =>
+                `relative px-4 py-2 text-[15px] font-semibold transition-all duration-300 rounded-lg group ${
+                  isActive ? "text-white" : "text-gray-400 hover:text-white"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <span className="relative z-10">Education</span>
+                  <span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#88cc14] transition-all duration-300 ${
+                      isActive
+                        ? "w-3/4 opacity-100"
+                        : "w-0 opacity-0 group-hover:w-3/4 group-hover:opacity-100"
+                    }`}
+                  />
+                  {isActive && <span className="absolute inset-0 bg-[#88cc14]/10 rounded-lg" />}
+                </>
+              )}
+            </NavLink>
+
+            {/* Compete Dropdown */}
+            <div className="relative" ref={competeDropdownRef}>
+              <button
+                onClick={() => {
+                  setOpenCompete((prev) => !prev);
+                  setOpenPractice(false);
+                }}
+                onMouseEnter={() => {
+                  setOpenCompete(true);
+                  setOpenPractice(false);
+                }}
+                className={`relative px-4 py-2 text-[15px] font-semibold transition-all duration-300 rounded-lg group flex items-center gap-1 ${
+                  isCompeteActive ? "text-white" : "text-gray-400 hover:text-white"
+                }`}
               >
                 <span className="relative z-10">Compete</span>
                 <ChevronDown open={openCompete} />
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#88cc14] transition-all duration-300 w-0 opacity-0 group-hover:w-3/4 group-hover:opacity-100" />
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#88cc14] transition-all duration-300 ${
+                    isCompeteActive
+                      ? "w-3/4 opacity-100"
+                      : "w-0 opacity-0 group-hover:w-3/4 group-hover:opacity-100"
+                  }`}
+                />
+                {isCompeteActive && <span className="absolute inset-0 bg-[#88cc14]/10 rounded-lg" />}
               </button>
 
+              {/* Compete Dropdown Menu */}
               <div
                 onMouseLeave={() => setOpenCompete(false)}
-                className={`absolute top-14 left-0 w-60 rounded-xl overflow-hidden border border-white/10 bg-[#0b1220]/95 backdrop-blur-xl shadow-2xl transition-all duration-300 ${
+                className={`absolute top-14 left-0 w-64 rounded-xl overflow-hidden border border-white/10 bg-[#0b1220]/95 backdrop-blur-xl shadow-2xl transition-all duration-300 ${
                   openCompete
                     ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 -translate-y-2 pointer-events-none"
                 }`}
               >
-                {competeLinks.map((item) => (
-                  <NavLink
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setOpenCompete(false)}
-                    className={({ isActive }) =>
-                      `block px-4 py-3 text-[14px] font-semibold transition-all duration-200 ${
-                        isActive
-                          ? "bg-[#88cc14]/15 text-[#88cc14]"
-                          : "text-gray-300 hover:text-white hover:bg-white/5"
-                      }`
-                    }
-                  >
-                    {item.name}
-                  </NavLink>
-                ))}
+                {/* Dropdown Header */}
+                <div className="px-4 py-3 border-b border-white/10 bg-white/5">
+                  <h3 className="text-white font-semibold text-sm">Competitions</h3>
+                  <p className="text-gray-500 text-xs mt-0.5">Test your skills against others</p>
+                </div>
+
+                {/* Dropdown Links */}
+                <div className="py-2">
+                  {competeLinks.map((item) => (
+                    <NavLink
+                      key={item.name}
+                      to={item.path}
+                      onClick={() => {
+                        setOpenCompete(false);
+                        closeAllDropdowns();
+                      }}
+                      className={({ isActive }) =>
+                        `flex items-start gap-3 px-4 py-3 transition-all duration-200 ${
+                          isActive
+                            ? "bg-[#88cc14]/15 border-l-2 border-[#88cc14]"
+                            : "hover:bg-white/5 border-l-2 border-transparent"
+                        }`
+                      }
+                    >
+                      {({ isActive }) => (
+                        <>
+                          <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
+                          <div className="min-w-0">
+                            <div className={`text-[14px] font-semibold ${
+                              isActive ? "text-[#88cc14]" : "text-gray-300"
+                            }`}>
+                              {item.name}
+                            </div>
+                            <div className="text-[12px] text-gray-500 mt-0.5 truncate">
+                              {item.description}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </NavLink>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* ✅ Desktop Actions */}
+          {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
             <button
               className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-white/10"
@@ -197,7 +422,7 @@ const Navbar = () => {
               className="relative px-6 py-2.5 text-[14px] font-semibold text-[#88cc14] border-2 border-[#88cc14] rounded-full transition-all duration-300 hover:bg-[#88cc14]/10 hover:shadow-lg hover:shadow-[#88cc14]/30 group overflow-hidden"
             >
               <span className="relative z-10">Log In</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#88cc14]/0 via-[#88cc14​​o8cc14]/20 to-[#88cc14]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#88cc14]/0 via-[#88cc14]/20 to-[#88cc14]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
             </Link>
 
             <Link
@@ -209,7 +434,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* ✅ Mobile Actions (Aligned Properly) */}
+          {/* Mobile Actions */}
           <div className="flex md:hidden items-center gap-1">
             <button
               className="p-1.5 text-gray-400 hover:text-white rounded-full transition-colors hover:bg-white/10"
@@ -222,6 +447,7 @@ const Navbar = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 setIsOpen((prev) => !prev);
+                closeAllDropdowns();
               }}
               className="p-1.5 text-gray-400 hover:text-white rounded-lg transition-colors hover:bg-white/10"
               aria-label="Toggle menu"
@@ -232,47 +458,135 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ✅ Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-gradient-to-b from-[#0d1525] to-[#0a1222] border-t border-white/10 px-4 py-4 space-y-2">
-          {/* Mobile Navigation Links */}
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `block px-4 py-3 rounded-lg text-[16px] font-semibold transition-all duration-200 ${
-                  isActive
-                    ? "bg-[#88cc14]/20 text-[#88cc14] border-l-4 border-[#88cc14]"
-                    : "text-gray-400 hover:text-white hover:bg-white/5 hover:pl-6"
-                }`
-              }
+          {/* Learn Link */}
+          <NavLink
+            to="/learn"
+            onClick={() => setIsOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-3 rounded-lg text-[16px] font-semibold transition-all duration-200 ${
+                isActive
+                  ? "bg-[#88cc14]/20 text-[#88cc14] border-l-4 border-[#88cc14]"
+                  : "text-gray-400 hover:text-white hover:bg-white/5 hover:pl-6"
+              }`
+            }
+          >
+            Learn
+          </NavLink>
+
+          {/* Mobile Practice Dropdown */}
+          <div className="pt-1">
+            <button
+              onClick={() => setOpenPractice((prev) => !prev)}
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-[16px] font-semibold transition-all duration-200 ${
+                isPracticeActive 
+                  ? "bg-[#88cc14]/10 text-[#88cc14]" 
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
+              }`}
             >
-              {link.name}
-            </NavLink>
-          ))}
+              <div className="flex items-center gap-2">
+                <span>Practice</span>
+                {isPracticeActive && (
+                  <span className="w-1.5 h-1.5 bg-[#88cc14] rounded-full" />
+                )}
+              </div>
+              <ChevronDown open={openPractice} />
+            </button>
+
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                openPractice ? "max-h-96 opacity-100 mt-2" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="ml-2 space-y-1 border-l-2 border-white/10 pl-4">
+                {practiceLinks.map((item) => (
+                  <NavLink
+                    key={item.name}
+                    to={item.path}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setOpenPractice(false);
+                    }}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-4 py-3 rounded-lg text-[15px] font-semibold transition-all duration-200 ${
+                        isActive
+                          ? "bg-[#88cc14]/20 text-[#88cc14] border-l-2 border-[#88cc14] -ml-[2px]"
+                          : "text-gray-300 hover:text-white hover:bg-white/5"
+                      }`
+                    }
+                  >
+                    <span className="text-lg">{item.icon}</span>
+                    <div>
+                      <div>{item.name}</div>
+                      <div className="text-[11px] text-gray-500 font-normal">{item.description}</div>
+                    </div>
+                  </NavLink>
+                ))}
+                
+                {/* View All Link */}
+                <Link
+                  to="/practice"
+                  onClick={() => {
+                    setIsOpen(false);
+                    setOpenPractice(false);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 text-[13px] text-[#88cc14] font-medium hover:text-[#a3e635] transition-colors"
+                >
+                  <span>View all practice labs</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Education Link */}
+          <NavLink
+            to="/education"
+            onClick={() => setIsOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-3 rounded-lg text-[16px] font-semibold transition-all duration-200 ${
+                isActive
+                  ? "bg-[#88cc14]/20 text-[#88cc14] border-l-4 border-[#88cc14]"
+                  : "text-gray-400 hover:text-white hover:bg-white/5 hover:pl-6"
+              }`
+            }
+          >
+            Education
+          </NavLink>
 
           {/* Mobile Compete Dropdown */}
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               onClick={() => setOpenCompete((prev) => !prev)}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-[16px] font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-200"
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-[16px] font-semibold transition-all duration-200 ${
+                isCompeteActive 
+                  ? "bg-[#88cc14]/10 text-[#88cc14]" 
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
+              }`}
             >
-              <span>Compete</span>
+              <div className="flex items-center gap-2">
+                <span>Compete</span>
+                {isCompeteActive && (
+                  <span className="w-1.5 h-1.5 bg-[#88cc14] rounded-full" />
+                )}
+              </div>
               <ChevronDown open={openCompete} />
             </button>
 
             <div
               className={`overflow-hidden transition-all duration-300 ${
-                openCompete ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
+                openCompete ? "max-h-60 opacity-100 mt-2" : "max-h-0 opacity-0"
               }`}
             >
-              <div className="ml-4 space-y-2 border-l border-white/10 pl-4">
+              <div className="ml-2 space-y-1 border-l-2 border-white/10 pl-4">
                 {competeLinks.map((item) => (
                   <NavLink
                     key={item.name}
@@ -282,14 +596,18 @@ const Navbar = () => {
                       setOpenCompete(false);
                     }}
                     className={({ isActive }) =>
-                      `block px-4 py-2 rounded-lg text-[15px] font-semibold transition-all duration-200 ${
+                      `flex items-center gap-3 px-4 py-3 rounded-lg text-[15px] font-semibold transition-all duration-200 ${
                         isActive
-                          ? "bg-[#88cc14]/20 text-[#88cc14]"
+                          ? "bg-[#88cc14]/20 text-[#88cc14] border-l-2 border-[#88cc14] -ml-[2px]"
                           : "text-gray-300 hover:text-white hover:bg-white/5"
                       }`
                     }
                   >
-                    {item.name}
+                    <span className="text-lg">{item.icon}</span>
+                    <div>
+                      <div>{item.name}</div>
+                      <div className="text-[11px] text-gray-500 font-normal">{item.description}</div>
+                    </div>
                   </NavLink>
                 ))}
               </div>
