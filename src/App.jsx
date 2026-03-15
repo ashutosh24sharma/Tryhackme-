@@ -13,6 +13,7 @@ import Leaderboard from "./Pages/Compete/Leaderboard/leaderboardmain.jsx";
 import Challenges from "./Pages/Practice/Challenges/Challengesmain.jsx";
 import SOCSimulator from "./Pages/Practice/SOCSimulator/SOCSimulatormain.jsx";
 import ThreatHuntingSimulator from "./Pages/Practice/ThreatHuntingSimulator/ThreatHuntingSimulatormain.jsx";
+import Exercise from "./Pages/Practice/Exersise/exercisemain.jsx";
 
 function App() {
   return (
@@ -37,15 +38,12 @@ function App() {
           path="/practice/threat-hunting"
           element={<ThreatHuntingSimulator />}
         />
-{/*         
+{         
         <Route
           path="/practice/malware-analysis"
-          element={<MalwareAnalysis />}
+          element={<Exercise />}
         />
-        <Route
-          path="/practice/penetration-testing"
-          element={<PenetrationTesting />}
-        /> */}
+        }
       </Routes>
     </Router>
   );

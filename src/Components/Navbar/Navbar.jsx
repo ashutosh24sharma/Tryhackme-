@@ -39,17 +39,12 @@ const Navbar = () => {
       description: "Hunt real adversary behaviors"
     },
     { 
-      name: "Malware Analysis", 
+      name: "TableTop Exercises", 
       path: "/practice/malware-analysis",
       icon: "🦠",
-      description: "Analyze and reverse engineer malware"
+      description: "Tests response readines"
     },
-    { 
-      name: "Penetration Testing", 
-      path: "/practice/penetration-testing",
-      icon: "💻",
-      description: "Ethical hacking challenges"
-    },
+    
   ];
 
   // Compete dropdown links
@@ -559,19 +554,8 @@ const Navbar = () => {
                   ))}
                 </div>
 
-                {/* Dropdown Footer */}
-                <div className="px-4 py-3 border-t border-white/10 bg-white/5">
-                  <Link
-                    to="/practice"
-                    onClick={() => setOpenPractice(false)}
-                    className="flex items-center justify-between text-[13px] text-[#88cc14] hover:text-[#a3e635] font-medium transition-colors"
-                  >
-                    <span>View all practice labs</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
+            
+                
               </div>
             </div>
 
