@@ -1398,7 +1398,7 @@ const ThreatHuntingSimulator = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#080c14] via-[#0a1018] to-[#060a10] text-white overflow-hidden">
+    <div className="min-h-screen mt-10 bg-gradient-to-b from-[#080c14] via-[#0a1018] to-[#060a10] text-white overflow-hidden">
       {/* Quick Links Navigation */}
       <QuickLinksNav activeSection={activeSection} />
 

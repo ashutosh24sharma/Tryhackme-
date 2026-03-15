@@ -1104,7 +1104,7 @@ const SOCSimulator = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0b1220] via-[#0f1c2e] to-[#081224] text-white overflow-hidden">
+    <div className="min-h-screen mt-10 bg-gradient-to-b from-[#0b1220] via-[#0f1c2e] to-[#081224] text-white overflow-hidden">
       {/* Quick Links Navigation */}
       <QuickLinksNav activeSection={activeSection} />
 
