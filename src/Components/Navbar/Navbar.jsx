@@ -26,24 +26,6 @@ const Navbar = () => {
       icon: "🚨",
       description: "Handle security incidents effectively"
     },
-    { 
-      name: "SOC Simulator", 
-      path: "/practice/soc-simulator",
-      icon: "🛡️",
-      description: "Simulated SOC environment training"
-    },
-    { 
-      name: "Threat Hunting Simulator", 
-      path: "/practice/threat-hunting",
-      icon: "🔍",
-      description: "Hunt real adversary behaviors"
-    },
-    { 
-      name: "TableTop Exercises", 
-      path: "/practice/malware-analysis",
-      icon: "🦠",
-      description: "Tests response readines"
-    },
     
   ];
 

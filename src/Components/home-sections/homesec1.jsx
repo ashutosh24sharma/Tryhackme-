@@ -19,7 +19,7 @@ export default function HomePage() {
       if (!isDeleting) {
         setTypedText(currentWord.substring(0, typedText.length + 1));
         if (typedText === currentWord) {
-          setTimeout(() => setIsDeleting(true), 2000);
+          setTimeout(() => setIsDeleting(true), 4000);
         }
       } else {
         setTypedText(currentWord.substring(0, typedText.length - 1));
@@ -28,7 +28,7 @@ export default function HomePage() {
           setCurrentWordIndex((prev) => (prev + 1) % words.length);
         }
       }
-    }, isDeleting ? 50 : 100);
+    }, isDeleting ? 200 : 200);
     return () => clearTimeout(timeout);
   }, [typedText, isDeleting, currentWordIndex]);
 
